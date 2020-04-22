@@ -23,10 +23,5 @@ class FormbuilderEventServiceProvider extends ServiceProvider
      *
      * @param \Illuminate\Contracts\Events\Dispatcher $events
      */
-    public function boot(DispatcherContract $events)
-    {
-        parent::boot($events);
-
-        //
-    }
+   
 }
