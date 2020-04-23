@@ -62,6 +62,11 @@ Please add this to your composer.json file:
 ```
 and run composer update again.
 
+Publish the module assets to the public folder. This is important. Not doing this will cause a lot of js errors and creating a form will not be possible
+```php    
+    php artisan asgard:module:publish Formbuilder
+```
+
 That's it.
 
 ### 3. Add middleware
