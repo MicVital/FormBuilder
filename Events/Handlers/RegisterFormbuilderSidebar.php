@@ -1,13 +1,14 @@
 <?php
 
-namespace Modules\Formbuilder\Sidebar;
+namespace Modules\Formbuilder\Events\Handlers;
 
 use Maatwebsite\Sidebar\Group;
 use Maatwebsite\Sidebar\Item;
 use Maatwebsite\Sidebar\Menu;
+use Modules\Core\Events\BuildingSidebar;
 use Modules\User\Contracts\Authentication;
 
-class SidebarExtender implements \Maatwebsite\Sidebar\SidebarExtender
+class RegisterFormbuilderSidebar implements \Maatwebsite\Sidebar\SidebarExtender
 {
     /**
      * @var Authentication
@@ -24,15 +25,18 @@ class SidebarExtender implements \Maatwebsite\Sidebar\SidebarExtender
         $this->auth = $auth;
     }
 
+    public function handle(BuildingSidebar $sidebar)
+    {
+        $sidebar->add($this->extendWith($sidebar->getMenu()));
+    }
+
     /**
      * @param Menu $menu
-     *
      * @return Menu
      */
     public function extendWith(Menu $menu)
     {
         $menu->group(trans('core::sidebar.content'), function (Group $group) {
-
             $group->item(trans('formbuilder::formbuilder.title.form builder'), function (Item $item) {
                 $item->weight(0);
                 $item->icon('fa fa-list-alt');
@@ -59,6 +63,7 @@ class SidebarExtender implements \Maatwebsite\Sidebar\SidebarExtender
                 });
             });
         });
+
 
         return $menu;
     }
