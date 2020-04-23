@@ -3,10 +3,15 @@
 namespace Modules\Formbuilder\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Modules\Core\Traits\CanPublishConfiguration;
+use Modules\Core\Events\BuildingSidebar;
+use Modules\Core\Events\LoadingBackendTranslations;
+use Modules\Formbuilder\Events\Handlers\RegisterFormbuilderSidebar;
 use Pingpong\Shortcode\ShortcodeFacade as Shortcode;
 
 class FormbuilderServiceProvider extends ServiceProvider
 {
+    use CanPublishConfiguration;
     /**
      * Indicates if loading of the provider is deferred.
      *
@@ -16,11 +21,26 @@ class FormbuilderServiceProvider extends ServiceProvider
 
     /**
      * Register the service provider.
+     *
+     * @return void
      */
     public function register()
     {
         $this->registerBindings();
-        $this->registerShortcode();
+        $this->app['events']->listen(BuildingSidebar::class, RegisterFormbuilderSidebar::class);
+
+        $this->app['events']->listen(LoadingBackendTranslations::class, function (LoadingBackendTranslations $event) {
+            $event->load('formbuilders', array_dot(trans('formbuilder::formbuilders')));
+            // append translations
+            $this->registerShortcode();
+        });
+    }
+
+    public function boot()
+    {
+        $this->publishConfig('formbuilder', 'permissions');
+
+        $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
     }
 
     /**
@@ -35,7 +55,20 @@ class FormbuilderServiceProvider extends ServiceProvider
 
     private function registerBindings()
     {
-        // add bindings
+        $this->app->bind(
+            'Modules\Formbuilder\Repositories\FormbuilderRepository',
+            function () {
+                $repository = new \Modules\Formbuilder\Repositories\Eloquent\EloquentFormbuilderRepository(new \Modules\Formbuilder\Entities\Formbuilder());
+
+                if (! config('app.cache')) {
+                    return $repository;
+                }
+
+                return new \Modules\Formbuilder\Repositories\Cache\CacheFormbuilderDecorator($repository);
+            }
+        );
+// add bindings
+
     }
 
     /**

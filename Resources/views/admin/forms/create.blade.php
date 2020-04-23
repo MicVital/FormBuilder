@@ -10,10 +10,10 @@
         <li class="active">{{ trans('formbuilder::formbuilder.title.create form') }}</li>
     </ol>
 @stop
-
++
 @section('styles')
     {!! Theme::script('js/vendor/ckeditor/ckeditor.js') !!}
-    {!! Theme::style('css/vendor/iCheck/flat/blue.css') !!}
+    {!! Theme::style('css/vendor/iCheck/skins/flat/blue.css') !!}
     <style>
         .checkbox label {
             padding-left: 0;

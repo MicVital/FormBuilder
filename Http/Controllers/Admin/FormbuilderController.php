@@ -94,8 +94,6 @@ class FormbuilderController extends AdminBaseController
     public function destroy($id)
     {
         Forms::findOrFail($id)->delete();
-        flash()->success(trans('core::core.messages.resource deleted', ['name' => trans('formbuilder::formbuilder.title.form')]));
-
-        return redirect()->route('admin.formbuilder.formbuilder.index');
+        return redirect()->route('admin.formbuilder.formbuilder.index')->with('success',trans('core::core.messages.resource deleted', ['name' => trans('formbuilder::formbuilder.title.form')]));
     }
 }

@@ -2,17 +2,17 @@
     "name": "Formbuilder",
     "alias": "formbuilder",
     "description": "",
-    "version": "v1.0.1",
     "keywords": [],
-    "active": 1,
+    "version": "1.0.0",
+	"active": 1,
     "order": 1,
     "providers": [
         "Modules\\Formbuilder\\Providers\\FormbuilderServiceProvider",
-        "Modules\\Formbuilder\\Providers\\RouteServiceProvider",
-		"Modules\\Formbuilder\\Providers\\FormbuilderEventServiceProvider"
+        "Modules\\Formbuilder\\Providers\\RouteServiceProvider"
     ],
-    "aliases":{},
+    "aliases": {},
     "files": [
         
-    ]
+    ],
+    "requires": []
 }
