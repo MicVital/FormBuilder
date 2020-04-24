@@ -3,7 +3,7 @@
 namespace Modules\Formbuilder\Http\Middleware;
 
 use Closure;
-use Pingpong\Shortcode\ShortcodeFacade as Shortcode;
+use Micvital\Shortcode\ShortcodeFacade as Shortcode;
 
 class FormbuilderMiddleware
 {

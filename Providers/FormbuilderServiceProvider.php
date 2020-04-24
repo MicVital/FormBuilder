@@ -7,7 +7,7 @@ use Modules\Core\Traits\CanPublishConfiguration;
 use Modules\Core\Events\BuildingSidebar;
 use Modules\Core\Events\LoadingBackendTranslations;
 use Modules\Formbuilder\Events\Handlers\RegisterFormbuilderSidebar;
-use Pingpong\Shortcode\ShortcodeFacade as Shortcode;
+use Micvital\Shortcode\ShortcodeFacade as Shortcode;
 
 class FormbuilderServiceProvider extends ServiceProvider
 {

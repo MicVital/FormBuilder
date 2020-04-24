@@ -43,12 +43,12 @@ Next, open a terminal and run.
 
 After the composer updated. Add new service provider in config/app.php.
 ```php
-  'Pingpong\Shortcode\ShortcodeServiceProvider'
+  'Micvital\Shortcode\ShortcodeServiceProvider'
 ```
 
 Add new Facade alias.
 ```php
-'Shortcode'       => 'Pingpong\Shortcode\ShortcodeFacade',
+'Shortcode'       => 'Micvital\Shortcode\ShortcodeFacade',
 ```
 Done.
 
